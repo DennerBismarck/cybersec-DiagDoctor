@@ -20,7 +20,7 @@ def get_open_ports(host, start_port=1, end_port=65535, timeout=1):
             s.settimeout(timeout)
             s.connect((host, port))
             s.close()
-            open_ports.appenclead(port)
+            open_ports.append(port)
         except (ConnectionRefusedError, socket.timeout):
             pass  # Port is closed or filtered
         except Exception as e:

@@ -34,7 +34,7 @@ def check_ports_http_https(host, ports):
                 http_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 http_socket.settimeout(1)
                 http_socket.connect((host, port))
-                http_socket.sendall(b"GET / HTTP/1.1\r\nHost: {}\r\n\r\n".format(host.encode()))
+                http_socket.sendall(f"GET / HTTP/1.1\r\nHost: {host}\r\n\r\n".encode())
                 response = http_socket.recv(1024).decode()
                 http_socket.close()
                 if response.startswith("HTTP/"):
@@ -48,7 +48,7 @@ def check_ports_http_https(host, ports):
                 context = ssl.create_default_context()
                 with socket.create_connection((host, port), timeout=1) as sock:
                     with context.wrap_socket(sock, server_hostname=host) as ssock:
-                        ssock.sendall(b"GET / HTTP/1.1\r\nHost: {}\r\n\r\n".format(host.encode()))
+                        ssock.sendall(f"GET / HTTP/1.1\r\nHost: {host}\r\n\r\n".encode())
                         response = ssock.recv(1024).decode()
                         if response.startswith("HTTP/"):
                             results[port] = "https"
