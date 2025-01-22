@@ -13,7 +13,8 @@ USAGE="""\
 if __name__ == "__main__":
     if len(sys.argv)==2:
         host = sys.argv[1]
-        ports = get_open_ports(host=host)
+        ports_to_scan = [80, 8080, 8000, 8888, 443, 8443, 4443, 3000, 4000, 5000, 7000, 9000]
+        ports = get_open_ports(host=host, ports=ports_to_scan)
 
         print(f"Checking ports on {host}...")
         results = check_ports_http_https(host, ports)

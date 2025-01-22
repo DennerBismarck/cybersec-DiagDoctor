@@ -1,20 +1,19 @@
 import socket
 
-def get_open_ports(host, start_port=1, end_port=65535, timeout=1):
+def get_open_ports(host, ports, timeout=1):
     """
-    Check for all open ports on a host within a specified range.
+    Check for open ports on a host from a specified list of ports.
 
     Args:
         host (str): Hostname or IP address.
-        start_port (int): Starting port number (default: 1).
-        end_port (int): Ending port number (default: 65535).
+        ports (list): List of ports to scan.
         timeout (float): Timeout in seconds for each connection attempt (default: 1).
 
     Returns:
         list: A list of open ports.
     """
     open_ports = []
-    for port in range(start_port, end_port + 1):
+    for port in ports:
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.settimeout(timeout)
